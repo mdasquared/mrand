@@ -5,15 +5,20 @@
 extern "C" {
 #endif
 
-#include <time.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stddef.h>
 
-uint32_t mrand_state;
+typedef struct
+{
+    size_t seed;
+} MRand;
 
-void init_mrand(uint32_t);
-void mrand_seed(uint32_t);
-uint8_t mrand_generate();
+MRand *init_mrand(size_t);
+void *free_mrand(MRand*);
+
+void mrand_seed(MRand*, size_t);
+size_t mrand_generate(MRand*);
 
 #ifdef __cplusplus
 }

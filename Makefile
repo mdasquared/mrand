@@ -1,6 +1,6 @@
 CC=gcc
 AR=ar
-CFLAGS=-IInclude -fPIE -std=gnu99
+CFLAGS=-IInclude -fPIE -std=gnu99 -D_USE_CRAND
 
 RM=rm
 
@@ -12,12 +12,8 @@ LIB_OUT=mrand.o
 all: build clean
 
 build:
-	for src in $(LIB_SRC); do \
-		$(CC) -c $$src $(CFLAGS); \
-	done
+	$(CC) -c $(LIB_SRC) $(CFLAGS)
 	$(AR) rcs $(LIB) $(LIB_OUT)
 
 clean:
-	for out in $(LIB_OUT); do \
-		$(RM) $$out; \
-	done
+	$(RM) $(LIB_OUT)

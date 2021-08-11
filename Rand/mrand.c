@@ -1,20 +1,33 @@
 #include "mrand.h"
 
-void init_mrand(uint32_t seed) {
-#ifdef _USE_CRAND
-    srand(seed);
-    mrand_state = rand();
-#else
-    mrand_state = seed;
-#endif
+MRand *init_mrand(size_t seed) {
+    MRand *this = (MRand*)calloc(1, sizeof(MRand));
+
+    this->seed = seed;
+
+    return this;
 }
 
-void mrand_seed(uint32_t seed) {
-    mrand_state = mrand_state + seed;
+void *free_mrand(MRand *this) {
+    size_t *oseed = (size_t*)malloc(sizeof(size_t));
+
+    *oseed = this->seed;
+
+    free(this);
+
+    return (void*)oseed;
 }
 
-uint8_t mrand_generate() {
-    mrand_state = mrand_state * 0x19660D + 0x3C6EF35F;
+void mrand_seed(MRand *this, size_t seed) {
+    this->seed = seed;
+}
 
-    return mrand_state >> 24;
+size_t mrand_generate(MRand *this) {
+    this->seed = this->seed * (this->seed + this->seed);
+
+    if (this->seed != 0 && this->seed % 2 == 0) {
+        this->seed = this->seed - (this->seed / 2);
+    }
+
+    return this->seed;
 }
