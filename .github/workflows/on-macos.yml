@@ -1,0 +1,17 @@
+name: Test Build CI on macOS
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: make
+      run: make all
