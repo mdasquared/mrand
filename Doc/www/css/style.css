@@ -1,0 +1,13 @@
+.title {
+    text-align: center;
+}
+
+.subtitle {
+    position: relative;
+    vertical-align: left;
+    margin-left: 10px;
+}
+
+p {
+    font-size: large;
+}

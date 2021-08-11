@@ -1,6 +1,6 @@
 CC=gcc
 AR=ar
-CFLAGS=-IInclude -fPIC -std=c99
+CFLAGS=-IInclude -fPIC -std=gnu99
 
 RM=rm
 

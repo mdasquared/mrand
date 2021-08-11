@@ -1,7 +1,7 @@
 #include "mrand.h"
 
 void init_mrand(uint32_t seed) {
-#ifndef _USE_CRAND
+#ifdef _USE_CRAND
     srand(seed);
     mrand_state = rand();
 #else

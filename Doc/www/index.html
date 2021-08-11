@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <title>Building mRand</title>
+    </head>
+    <body>
+        <h1 class="title">Building mRand</h1>
+        <h2 class="subtitle">1. On Windows</h2>
+        <p>
+            To build mRand on Windows, you need
+            <a href="https://visualstudio.microsoft.com/vs/preview/">
+                Visual Studio 2022
+            </a>. Open the
+            <a href="https://github.com/sahdjfg/mrand/blob/main/PCbuild/_rand.sln">
+                PCbuild/_rand.sln
+            </a> with Visual Studio 2022 and Build->Rebuild Solution or CTRL+ALT+F7.
+        </p>
+
+        <h2 class="subtitle">2. On Linux</h2>
+        <p>
+            First of all,
+            be sure that you installed GNU binutils, GNU compiler collection and GNU make
+            so you can build the project.
+
+            After installing them (Or if you already have them installed),
+            chdir to the root directory of the repository and run command
+            <pre>
+                <code>
+                    # If make command doesn't work, try gmake
+                    $ make # Do not use -j, it breaks the build
+                </code>
+            </pre>
+        </p>
+
+        <h2 class="subtitle">3. On macOS</h2>
+        <p>
+            Be sure that you have installed XCode toolchain on your machine.
+            After that, chdir to the root directory of the repository and run command
+            <pre>
+                <code>
+                    # If make command doesn't work, try gmake
+                    $ make # Do not use -j, it breaks the build
+                </code>
+            </pre>
+        </p>
+
+        <h1 class="title">Example</h1>
+        <pre>
+            <code>
+                #include &lt;stdio.h&gt;
+
+                /*
+                 Replace the `path/to`
+                 with path to mRand header
+                 file.
+                */
+                #include "path/to/mrand.h"
+
+                int main(int argc, char *argv[]) {
+                    /*
+                     Initialize mRand
+                     with a default value.
+                     You can replace the
+                     777 with anything
+                     you want.
+                    */
+                    init_mrand(777);
+
+                    /*
+                     You can seed
+                     mRand anytime
+                     you want.
+
+                     Again, you can
+                     replace the 888
+                     with any number
+                     you want.
+                    */
+                    mrand_seed(888);
+
+                    /*
+                     And finally,
+                     generate the
+                     number.
+
+                     Note: Prefer
+                     casting the return
+                     value to int since
+                     the return type is
+                     uint8_t from
+                     &lt;stdint.h&gt;
+                    */
+                    int num = (int)mrand_generate();
+
+                    /*
+                     And finally, use it.
+                     (I'll print it for this time.)
+                    */
+                    
+                    printf("Generated number is %d.\n", num);
+                    
+                    return 0;
+                }
+            </code>
+        </pre>
+    </body>
+</html>
