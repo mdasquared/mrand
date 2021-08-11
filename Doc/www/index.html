@@ -54,6 +54,7 @@
         <h1 class="title">Example</h1>
         <pre>
             <code>
+                #include &lt;time.h&gt;
                 #include &lt;stdio.h&gt;
 
                 /*
@@ -67,23 +68,15 @@
                     /*
                      Initialize mRand
                      with a default value.
-                     You can replace the
-                     777 with anything
-                     you want.
                     */
-                    init_mrand(777);
+                    init_mrand(time(NULL));
 
                     /*
                      You can seed
                      mRand anytime
                      you want.
-
-                     Again, you can
-                     replace the 888
-                     with any number
-                     you want.
                     */
-                    mrand_seed(888);
+                    mrand_seed(time(NULL));
 
                     /*
                      And finally,
