@@ -69,14 +69,14 @@
                      Initialize mRand
                      with a default value.
                     */
-                    init_mrand(time(NULL));
+                    MRand *mrand = init_mrand(time(NULL));
 
                     /*
                      You can seed
                      mRand anytime
                      you want.
                     */
-                    mrand_seed(time(NULL));
+                    mrand_seed(mrand, time(NULL));
 
                     /*
                      And finally,
@@ -90,7 +90,7 @@
                      uint8_t from
                      &lt;stdint.h&gt;
                     */
-                    int num = (int)mrand_generate();
+                    int num = (int)mrand_generate(mrand);
 
                     /*
                      And finally, use it.
@@ -98,6 +98,19 @@
                     */
                     
                     printf("Generated number is %d.\n", num);
+
+                    /*
+                     At the end,
+                     do not forget
+                     to free the
+                     mRand.
+
+                     You can
+                     optionally
+                     save the last
+                     seed.
+                    */
+                    size_t *lseed = (size_t*)free_mrand(mrand);
                     
                     return 0;
                 }
